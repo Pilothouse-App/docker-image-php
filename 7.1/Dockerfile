@@ -1,7 +1,7 @@
 FROM php:7.1-fpm-alpine
 
 RUN apk add --no-cache --virtual .build-deps \
-	git autoconf g++ libtool make imagemagick-dev libmemcached-dev libjpeg-turbo-dev libpng-dev zlib-dev cyrus-sasl-dev \
+	git autoconf g++ libtool make cyrus-sasl-dev imagemagick-dev libmemcached-dev libjpeg-turbo-dev libpng-dev pcre-dev zlib-dev \
 	&& docker-php-source extract
 
 RUN git clone https://github.com/websupport-sk/pecl-memcache.git /usr/src/php/ext/memcache/ \
@@ -14,7 +14,7 @@ RUN git clone --branch php7 https://github.com/php-memcached-dev/php-memcached /
 
 RUN apk add --no-cache imagemagick libmemcached mysql-client \
 	&& pecl install imagick \
-	&& docker-php-ext-install calendar gd mysqli opcache pdo_mysql zip \
+	&& docker-php-ext-install calendar exif gd mysqli opcache pdo_mysql zip \
 	&& docker-php-ext-enable imagick
 
 RUN rm -rf /usr/src/php/ext/memcache \
