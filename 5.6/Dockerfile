@@ -1,25 +1,18 @@
 FROM php:5.6-fpm-alpine
 
 RUN apk add --no-cache --virtual .build-deps \
-	git autoconf g++ libtool make cyrus-sasl-dev imagemagick-dev libmemcached-dev libjpeg-turbo-dev libpng-dev libxml2-dev pcre-dev zlib-dev \
+	git autoconf g++ libtool make cyrus-sasl-dev imagemagick-dev libjpeg-turbo-dev libpng-dev libxml2-dev pcre-dev zlib-dev \
 	&& docker-php-source extract
 
-RUN git clone https://github.com/websupport-sk/pecl-memcache.git /usr/src/php/ext/memcache/ \
-	&& docker-php-ext-configure memcache \
-	&& docker-php-ext-install memcache
-
-RUN git clone --branch 2.2.0 https://github.com/php-memcached-dev/php-memcached /usr/src/php/ext/memcached/ \
-	&& docker-php-ext-configure memcached \
-	&& docker-php-ext-install memcached
-
-RUN apk add --no-cache imagemagick libmemcached mysql-client \
+RUN apk add --no-cache imagemagick mysql-client \
 	&& pecl install imagick \
 	&& docker-php-ext-install calendar exif gd mysqli opcache pdo_mysql soap zip \
 	&& docker-php-ext-enable imagick
 
-RUN rm -rf /usr/src/php/ext/memcache \
-	&& rm -rf /usr/src/php/ext/memcached \
-	&& docker-php-source delete \
+RUN pecl install redis \
+    && docker-php-ext-enable redis
+
+RUN docker-php-source delete \
 	&& apk del .build-deps
 
 RUN apk add --no-cache less ssmtp
