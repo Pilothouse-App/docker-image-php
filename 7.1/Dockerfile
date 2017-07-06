@@ -15,7 +15,7 @@ RUN pecl install redis \
 RUN docker-php-source delete \
 	&& apk del .build-deps
 
-RUN apk add --no-cache less ssmtp
+RUN apk add --no-cache less ncurses ssmtp
 
 RUN ln -s /usr/local/vendor/wp-cli/wp-cli/bin/wp /usr/local/bin/wp
 RUN mkdir -p /home/www-data/.wp-cli && chown -R www-data:www-data /home/www-data/.wp-cli
