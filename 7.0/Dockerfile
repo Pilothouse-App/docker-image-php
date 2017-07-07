@@ -24,5 +24,12 @@ RUN rm -rf /usr/src/php/ext/memcache \
 
 RUN apk add --no-cache bash less ncurses ssmtp
 
-RUN ln -s /usr/local/vendor/wp-cli/wp-cli/bin/wp /usr/local/bin/wp
-RUN mkdir -p /home/www-data/.wp-cli && chown -R www-data:www-data /home/www-data/.wp-cli
+RUN curl -sL -o composer.phar https://getcomposer.org/download/1.4.2/composer.phar \
+	&& chmod +x composer.phar \
+	&& mv composer.phar /usr/local/bin/composer
+
+RUN curl -sL -o wp-cli.phar https://github.com/wp-cli/wp-cli/releases/download/v1.2.1/wp-cli-1.2.1.phar \
+	&& chmod +x wp-cli.phar \
+	&& mv wp-cli.phar /usr/local/bin/wp \
+	&& mkdir -p /home/www-data/.wp-cli \
+	&& chown -R www-data:www-data /home/www-data/.wp-cli
