@@ -19,7 +19,9 @@ RUN apk add --no-cache bash less ncurses ssmtp
 
 RUN curl -sL -o composer.phar https://getcomposer.org/download/1.4.2/composer.phar \
 	&& chmod +x composer.phar \
-	&& mv composer.phar /usr/local/bin/composer
+	&& mv composer.phar /usr/local/bin/composer \
+	&& mkdir -p /home/www-data/.composer \
+	&& chown -R www-data:www-data /home/www-data/.composer
 
 RUN curl -sL -o wp-cli.phar https://github.com/wp-cli/wp-cli/releases/download/v1.2.1/wp-cli-1.2.1.phar \
 	&& chmod +x wp-cli.phar \
