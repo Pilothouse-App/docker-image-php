@@ -22,7 +22,7 @@ RUN rm -rf /usr/src/php/ext/memcache \
 	&& docker-php-source delete \
 	&& apk del .build-deps
 
-RUN apk add --no-cache bash less ncurses ssmtp
+RUN apk add --no-cache bash git less ncurses ssmtp
 
 RUN curl -sL -o composer.phar https://getcomposer.org/download/1.4.2/composer.phar \
 	&& chmod +x composer.phar \
