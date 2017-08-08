@@ -1,5 +1,8 @@
 FROM php:5.6-fpm-alpine
 
+ENV COMPOSER_VERSION 1.5.0
+ENV WP_CLI_VERSION 1.3.0
+
 RUN apk add --no-cache --virtual .build-deps \
 	git autoconf g++ libtool make cyrus-sasl-dev imagemagick-dev libmemcached-dev libjpeg-turbo-dev libpng-dev libxml2-dev pcre-dev zlib-dev \
 	&& docker-php-source extract
@@ -24,11 +27,11 @@ RUN rm -rf /usr/src/php/ext/memcache \
 
 RUN apk add --no-cache bash git less ncurses ssmtp
 
-RUN curl -sL -o composer.phar https://getcomposer.org/download/1.4.2/composer.phar \
+RUN curl -sL -o composer.phar https://getcomposer.org/download/${COMPOSER_VERSION}/composer.phar \
 	&& chmod +x composer.phar \
 	&& mv composer.phar /usr/local/bin/composer
 
-RUN curl -sL -o wp-cli.phar https://github.com/wp-cli/wp-cli/releases/download/v1.2.1/wp-cli-1.2.1.phar \
+RUN curl -sL -o wp-cli.phar https://github.com/wp-cli/wp-cli/releases/download/v${WP_CLI_VERSION}/wp-cli-${WP_CLI_VERSION}.phar \
 	&& chmod +x wp-cli.phar \
 	&& mv wp-cli.phar /usr/local/bin/wp \
 	&& mkdir -p /home/www-data/.wp-cli \
