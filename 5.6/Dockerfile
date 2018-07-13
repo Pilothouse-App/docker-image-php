@@ -10,7 +10,7 @@ RUN apk add --no-cache --virtual .build-deps \
 RUN apk add --no-cache imagemagick mysql-client \
 	&& pecl install imagick \
 	&& docker-php-ext-configure gd --with-jpeg-dir=/usr/include/ \
-	&& docker-php-ext-install calendar exif gd mysqli opcache pdo_mysql soap zip \
+	&& docker-php-ext-install bcmath calendar exif gd mysqli opcache pdo_mysql soap zip \
 	&& docker-php-ext-enable imagick
 
 RUN pecl install redis \
