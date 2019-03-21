@@ -1,7 +1,7 @@
 FROM php:5.6-fpm-alpine
 
-ENV COMPOSER_VERSION 1.7.2
-ENV WP_CLI_VERSION 2.0.1
+ENV COMPOSER_VERSION 1.8.4
+ENV WP_CLI_VERSION 2.1.0
 
 RUN apk add --no-cache --virtual .build-deps \
 	git autoconf g++ libtool make cyrus-sasl-dev imagemagick-dev libjpeg-turbo-dev libpng-dev libxml2-dev pcre-dev zlib-dev \
