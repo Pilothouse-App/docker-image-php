@@ -13,7 +13,7 @@ RUN apk add --no-cache imagemagick mysql-client \
 	&& docker-php-ext-install bcmath calendar exif gd mysqli opcache pdo_mysql soap zip \
 	&& docker-php-ext-enable imagick
 
-RUN pecl install redis \
+RUN pecl install redis-4.3.0 \
     && docker-php-ext-enable redis
 
 RUN docker-php-source delete \
