@@ -4,10 +4,10 @@ ENV COMPOSER_VERSION 1.9.0
 ENV WP_CLI_VERSION 2.3.0
 
 RUN apk add --no-cache --virtual .build-deps \
-	git autoconf g++ libtool make cyrus-sasl-dev imagemagick-dev libjpeg-turbo-dev libpng-dev libxml2-dev libzip-dev pcre-dev zlib-dev \
+	git autoconf g++ libtool make cyrus-sasl-dev imagemagick-dev libjpeg-turbo-dev libpng-dev libxml2-dev pcre-dev \
 	&& docker-php-source extract
 
-RUN apk add --no-cache imagemagick mysql-client \
+RUN apk add --no-cache imagemagick libzip-dev mysql-client \
 	&& pecl install imagick \
 	&& docker-php-ext-configure gd --with-jpeg-dir=/usr/include/ \
 	&& docker-php-ext-install bcmath calendar exif gd mysqli opcache pdo_mysql soap zip \
