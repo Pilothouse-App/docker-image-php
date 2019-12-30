@@ -5,18 +5,18 @@ ENV WP_CLI_VERSION 2.4.0
 
 RUN apk add --no-cache --virtual .build-deps \
 	git autoconf g++ libtool make cyrus-sasl-dev imagemagick-dev libjpeg-turbo-dev libpng-dev libxml2-dev pcre-dev zlib-dev \
-	&& docker-php-source extract
-
-RUN apk add --no-cache imagemagick mysql-client \
+	&& docker-php-source extract \
+	\
+	&& apk add --no-cache imagemagick mysql-client \
 	&& pecl install imagick \
 	&& docker-php-ext-configure gd --with-jpeg-dir=/usr/include/ \
 	&& docker-php-ext-install bcmath calendar exif gd mysqli opcache pdo_mysql soap zip \
-	&& docker-php-ext-enable imagick
-
-RUN pecl install redis-4.3.0 \
-    && docker-php-ext-enable redis
-
-RUN docker-php-source delete \
+	&& docker-php-ext-enable imagick \
+	\
+	&& pecl install redis-4.3.0 \
+	&& docker-php-ext-enable redis \
+	\
+	&& docker-php-source delete \
 	&& apk del .build-deps
 
 RUN apk add --no-cache bash git less ncurses ssmtp
