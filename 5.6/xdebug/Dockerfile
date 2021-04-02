@@ -1,4 +1,4 @@
-FROM pilothouseapp/php:5.6-dev
+FROM pilothouse_php56:latest
 
 RUN apk add --no-cache --virtual .build-deps \
 	autoconf g++ make \

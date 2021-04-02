@@ -1,6 +1,6 @@
-FROM php:7.3-fpm-alpine
+FROM arm64v8/php:7.3-fpm-alpine
 
-ENV COMPOSER_VERSION 1.9.1
+ENV COMPOSER_VERSION 2.0.12
 ENV WP_CLI_VERSION 2.4.0
 
 RUN apk add --no-cache --virtual .build-deps \

@@ -1,6 +1,6 @@
-FROM pilothouseapp/php:7.0-dev
+FROM pilothouse_php70:latest
 
 RUN apk add --no-cache --virtual .build-deps \
 	autoconf g++ make \
-	&& pecl install xdebug-2.9.0 && docker-php-ext-enable xdebug \
+	&& pecl install xdebug-3.0.3 && docker-php-ext-enable xdebug \
 	&& apk del .build-deps
